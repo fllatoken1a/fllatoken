@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FLLA • Interactive Petals</title>
+<meta name="description" content="FLLA token landing with interactive petals, sci-fi gold/blue/violet theme, and parallax effects.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --gold:#D4AF37;
+    --gold-2:#f2d37c;
+    --blue:#102865;
+    --accent:#2d8fff;
+    --glass: rgba(255,255,255,0.06);
+    /*⬇️ ضع رابط الصورة هنا */
+    --bg-url: url('flla-bg.jpg'); /* or https://your.cdn/path/to/image.jpg */
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family:'Rubik',system-ui,Segoe UI,Arial; color:#e8edff;
+    background: #070b17;
+  }
+
+  /* Global background (fixed for all sections) */
+  .site-bg{
+    position:fixed; inset:0; z-index:-2;
+    background-image: var(--bg-url);
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    filter: saturate(1.05) contrast(1.02);
+  }
+  /* subtle star tint */
+  .tint{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background: radial-gradient(1200px 600px at 70% 10%, rgba(16,33,92,.3) 0%, rgba(8,14,40,.5) 40%, rgba(6,10,24,.8) 100%);
+  }
+
+  header{
+    position:sticky; top:0; z-index:20;
+    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,.28);
+    border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .wrap{max-width:1100px; margin-inline:auto; padding:14px 18px; display:flex; align-items:center; justify-content:space-between}
+  nav a{color:#e8edff; text-decoration:none; margin-inline:12px; opacity:.9}
+  nav a:hover{opacity:1}
+  .btn{
+    appearance:none; border:1px solid rgba(117,155,255,.28);
+    padding:10px 14px; border-radius:14px; font-weight:700; color:#eaf0ff;
+    background: linear-gradient(135deg, #142c6b 0%, #1e2f86 45%, #2744a8 100%);
+    box-shadow:0 8px 22px rgba(0,0,0,.35), 0 0 18px rgba(45,143,255,.25);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 14px 28px rgba(0,0,0,.45),0 0 28px rgba(45,143,255,.45)}
+
+  /* HERO: interactive petals overlay */
+  .hero{
+    min-height:72vh; display:grid; place-items:center; padding:36px 18px;
+  }
+  .petals-stage{
+    position:relative; width:min(78vmin,560px); aspect-ratio:1/1;
+    /* transparent overlay so image below remains visible */
+  }
+  /* Hotspot base style (invisible but with glow on hover) */
+  .hotspot{
+    position:absolute; border:none; background:transparent; cursor:pointer;
+    border-radius:28% 28% 38% 38% / 38% 38% 50% 50%; /* similar petal silhouette */
+    box-shadow: 0 0 0 0 rgba(45,143,255,0);
+    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  }
+  .hotspot:hover{
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 14px 38px rgba(0,0,0,.45), 0 0 30px rgba(45,143,255,.55);
+  }
+  /* center circle */
+  .core{
+    width:12%; aspect-ratio:1/1; border-radius:50%;
+    left:44%; top:44%;
+    background: radial-gradient(circle at 40% 40%, var(--gold-2), var(--gold) 60%, #b7912a 100%);
+    filter: drop-shadow(0 0 22px rgba(212,175,55,.45)) drop-shadow(0 0 60px rgba(45,143,255,.28));
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ transform: translateZ(0) scale(1); }
+    50%{ transform: translateZ(0) scale(1.08); }
+  }
+
+  /* Petals positions (percent based; calibrated for the shared image) */
+  .p-top   { width:30%; height:36%; left:35%; top:  8%; transform:rotate(0deg); }
+  .p-right { width:30%; height:36%; right: 6%; top: 31%; transform:rotate(90deg); }
+  .p-left  { width:30%; height:36%; left:  6%; top: 31%; transform:rotate(-90deg); }
+  .p-bottom{ width:30%; height:36%; left:35%; bottom: 6%; transform:rotate(180deg); }
+
+  /* Utility glass cards for sections */
+  .card{
+    background: var(--glass); border:1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(10px); border-radius:20px; padding:20px;
+  }
+  section{scroll-margin-top:90px}
+  h1,h2,h3{margin:0 0 10px}
+  h1{font-size:clamp(28px,4vw,44px); font-weight:800}
+  h2{font-size:clamp(22px,3vw,30px); font-weight:800}
+  p{line-height:1.8}
+  .gold{color:var(--gold)}
+  .muted{opacity:.78}
+  /* Footer */
+  footer{padding:26px 18px; text-align:center; background:rgba(0,0,0,.28); border-top:1px solid rgba(255,255,255,.12)}
+</style>
+</head>
+<body>
+
+<div class="site-bg" aria-hidden="true"></div>
+<div class="tint" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap">
+    <strong>FLLA • Petal UI</strong>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#presale">Presale</a>
+      <a href="#vote">Vote</a>
+      <a href="#whitepaper">Whitepaper</a>
+      <a href="#community">Community</a>
+    </nav>
+    <button id="btn-connect" class="btn">Connect</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO with interactive hotspots -->
+  <section class="hero">
+    <div class="petals-stage" id="stage">
+      <!-- Hotspots (transparent buttons over your image) -->
+      <button class="hotspot p-top"    data-target="#presale"   aria-label="Presale"></button>
+      <button class="hotspot p-right"  data-target="#vote"      aria-label="Vote"></button>
+      <button class="hotspot p-left"   data-target="#whitepaper"aria-label="Whitepaper"></button>
+      <button class="hotspot p-bottom" data-target="#community" aria-label="Community"></button>
+      <button class="hotspot core"     data-action="connect"    aria-label="Connect wallet"></button>
+    </div>
+  </section>
+
+  <!-- Content sections -->
+  <section id="about" class="wrap" style="margin-top:10px; margin-bottom:24px;">
+    <div class="card">
+      <h1>FLLA Token — Community First</h1>
+      <p class="muted">
+        Minimal landing experience with interactive petals. Click a petal to jump to an action.
+        Colors strictly follow the gold + cold blue/violet palette.
+      </p>
+    </div>
+  </section>
+
+  <section id="presale" class="wrap" style="margin-bottom:24px;">
+    <div class="card">
+      <h2>Presale</h2>
+      <p class="muted">Per-tx limit: <span class="gold">10,000 FLLA</span>. Demo only — plug your contract later.</p>
+      <div style="display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-top:10px">
+        <label class="card" style="display:flex;align-items:center;gap:10px">
+          <span>Pay with</span>
+          <select id="payToken" style="flex:1; padding:8px; border-radius:12px; background:rgba(0,0,0,.35); color:#e8edff; border:1px solid rgba(255,255,255,.15)">
+            <option>BNB</option><option>USDT</option>
+          </select>
+        </label>
+        <label class="card" style="display:flex;align-items:center;gap:10px">
+          <span>Amount (FLLA)</span>
+          <input id="amount" type="number" min="1" max="10000" step="1"
+                 placeholder="e.g. 2500"
+                 style="flex:1; padding:8px; border-radius:12px; background:rgba(0,0,0,.35); color:#e8edff; border:1px solid rgba(255,255,255,.15)">
+        </label>
+        <button id="btn-buy" class="btn">Buy now</button>
+      </div>
+      <div id="limitMsg" class="muted" style="color:#ffb4b4; display:none; margin-top:6px">Exceeded the 10,000 per-transaction cap.</div>
+      <p id="buyStatus" class="muted" style="margin-top:8px">Ready.</p>
+    </div>
+  </section>
+
+  <section id="vote" class="wrap" style="margin-bottom:24px;">
+    <div class="card">
+      <h2>Vote (monthly window)</h2>
+      <p class="muted">Opens automatically on the first day of each month for <span class="gold">10 hours</span>.</p>
+      <div class="muted" style="margin:.5rem 0">Current window: <span id="voteCountdown" class="gold" style="font-weight:800">—</span></div>
+      <div style="display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:10px">
+        <input id="voteTopic" placeholder="Topic (e.g. allocate 3% to marketing)"
+               style="padding:10px; border-radius:12px; background:rgba(0,0,0,.35); color:#e8edff; border:1px solid rgba(255,255,255,.15)">
+        <select id="voteChoice" style="padding:10px; border-radius:12px; background:rgba(0,0,0,.35); color:#e8edff; border:1px solid rgba(255,255,255,.15)">
+          <option value="yes">Yes</option><option value="no">No</option><option value="abstain">Abstain</option>
+        </select>
+        <button id="btn-vote" class="btn">Submit vote</button>
+      </div>
+      <p id="voteMsg" class="muted" style="margin-top:8px"></p>
+    </div>
+  </section>
+
+  <section id="whitepaper" class="wrap" style="margin-bottom:24px;">
+    <div class="card">
+      <h2>Whitepaper</h2>
+      <p class="muted">Add your PDF links or inline docs here. The palette remains gold + blue/violet only.</p>
+    </div>
+  </section>
+
+  <section id="community" class="wrap" style="margin-bottom:40px;">
+    <div class="card">
+      <h2>Community</h2>
+      <p class="muted">Links to Telegram, X/Twitter, Discord…</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
+        <a class="btn" href="#" target="_blank" rel="noopener">Telegram</a>
+        <a class="btn" href="#" target="_blank" rel="noopener">X / Twitter</a>
+        <a class="btn" href="#" target="_blank" rel="noopener">Discord</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© FLLA — All rights reserved.</footer>
+
+<script>
+/* ------- Parallax: move hotspots slightly with mouse ------- */
+const stage = document.getElementById('stage');
+const parallax = (e)=>{
+  const rect = stage.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top  + rect.height/2;
+  const dx = (e.clientX - cx) / rect.width;
+  const dy = (e.clientY - cy) / rect.height;
+  stage.style.transform = `translate3d(${dx*6}px, ${dy*6}px, 0)`;
+};
+window.addEventListener('mousemove', parallax);
+
+/* ------- Map petals to sections + Connect action ------- */
+document.querySelectorAll('.hotspot').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const t = btn.dataset.target;
+    const a = btn.dataset.action;
+    if (t){ document.querySelector(t).scrollIntoView({behavior:'smooth'}); }
+    if (a === 'connect'){ connect(); }
+  });
+});
+
+/* ------- Demo connect (replace with ethers later) ------- */
+async function connect(){
+  try{
+    if(!window.ethereum) return alert('Install MetaMask to connect.');
+    const accounts = await window.ethereum.request({ method:'eth_requestAccounts' });
+    const addr = accounts[0];
+    document.getElementById('btn-connect').textContent = addr.slice(0,6)+'…'+addr.slice(-4);
+  }catch(err){ alert('Connection failed'); console.error(err); }
+}
+
+/* ------- Presale demo with per-tx limit ------- */
+const MAX = 10000;
+const amt = document.getElementById('amount');
+const limitMsg = document.getElementById('limitMsg');
+amt.addEventListener('input', ()=>{
+  limitMsg.style.display = (+amt.value>MAX)?'block':'none';
+});
+document.getElementById('btn-buy').addEventListener('click', ()=>{
+  const q = +amt.value||0;
+  if(!q || q<1) return alert('Enter a valid amount.');
+  if(q>MAX) return alert('Exceeded 10,000 per transaction.');
+  document.getElementById('buyStatus').textContent = 'Demo order created ✓ (hook your contract later).';
+});
+
+/* ------- Monthly vote window (10h on day 1) ------- */
+function nowWin(){
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), 1, 0,0,0);
+  const end   = new Date(start.getTime()+10*60*60*1000);
+  return {now,start,end};
+}
+function pad(n){return String(n).padStart(2,'0')}
+function fmt(ms){
+  const h=Math.floor(ms/36e5), m=Math.floor((ms%36e5)/6e4), s=Math.floor((ms%6e4)/1000);
+  return `${pad(h)}:${pad(m)}:${pad(s)}`
+}
+function tick(){
+  const {now,start,end}=nowWin();
+  let txt;
+  if(now<start){ txt='Opens in '+fmt(start-now); }
+  else if(now<=end){ txt='Time left '+fmt(end-now); }
+  else{
+    const next = new Date(start); next.setMonth(start.getMonth()+1);
+    const nextStart = new Date(next.getFullYear(), next.getMonth(), 1, 0,0,0);
+    txt = 'Closed — next in '+fmt(nextStart-now);
+  }
+  document.getElementById('voteCountdown').textContent = txt;
+}
+tick(); setInterval(tick,1000);
+
+document.getElementById('btn-vote').addEventListener('click', ()=>{
+  const topic = document.getElementById('voteTopic').value.trim();
+  const choice = document.getElementById('voteChoice').value;
+  if(!topic) return alert('Enter a topic.');
+  document.getElementById('voteMsg').textContent =
+    `Recorded your vote (${choice}) on: "${topic}". (Wire to backend/smart-contract later)`;
+});
+</script>
+</body>
+</html>
