@@ -4,236 +4,140 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FLLA Token</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Main Style -->
   <style>
     body {
       margin: 0;
-      font-family: 'Tajawal', sans-serif;
-      background: url('flla-bg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      animation: fadeIn 1s ease-in;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .container {
+      padding: 0;
+      background: radial-gradient(circle at top, #1b1033, #0a0717);
+      color: #ffffff;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
       text-align: center;
-      padding: 50px 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 20px;
-      max-width: 900px;
-      margin: auto;
+      overflow-x: hidden;
     }
 
-    .logo {
-      width: 140px;
-      margin-bottom: 20px;
-      border-radius: 50%;
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    header {
+      background-color: #1b1633;
+      padding: 25px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
     h1 {
-      font-size: 3em;
-      color: #ffd700;
-      margin-bottom: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #f5d142;
+      font-size: 2.4em;
+      margin: 0;
     }
 
-    .petal {
-      display: inline-block;
-      margin: 10px;
-      padding: 15px 25px;
-      background: linear-gradient(to right, #6a00ff, #ffd700);
-      border-radius: 50px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      margin-top: 20px;
+      color: #ffffff;
     }
 
-    .petal:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    p {
+      max-width: 700px;
+      margin: 15px auto;
+      font-size: 18px;
     }
 
-    .section {
-      background-color: rgba(255, 255, 255, 0.05);
-      padding: 30px;
-      margin-top: 40px;
-      border-radius: 15px;
-      text-align: left;
-    }
-
-    .section h2 {
-      color: #ffd700;
-      margin-bottom: 15px;
-    }
-
-    .section label, .section select, .section input, .section textarea {
-      display: block;
-      width: 100%;
-      margin-bottom: 15px;
-      font-size: 1em;
-    }
-
-    .section input, .section select, .section textarea {
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
-      border-radius: 8px;
-    }
-
-    .btn {
-      background: linear-gradient(to right, #ffd700, #6a00ff);
-      color: white;
+    button, .btn {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background-color: #f5d142;
+      color: #0d0b1e;
       border: none;
-      padding: 12px 30px;
       border-radius: 10px;
-      font-size: 1.1em;
+      padding: 12px 30px;
       cursor: pointer;
-      transition: opacity 0.3s ease;
+      transition: all 0.3s ease;
+      margin-top: 20px;
     }
 
-    .btn:hover {
-      opacity: 0.9;
+    button:hover, .btn:hover {
+      background-color: #ffffff;
+      color: #0d0b1e;
     }
 
-    #receivedFLLA {
-      font-weight: bold;
-      color: #ffd700;
-      margin-top: 10px;
+    .counter-box {
+      margin-top: 50px;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(245, 209, 66, 0.3);
     }
 
-    .vote-options {
-      display: flex;
-      gap: 20px;
+    .counter-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5em;
+      color: #f5d142;
       margin-bottom: 15px;
     }
 
-    .vote-options label {
-      flex: 1;
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      text-align: center;
+    .counter-number {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5em;
+      color: #ffffff;
     }
 
-    .vote-options input {
-      display: none;
-    }
-
-    .vote-options input:checked + label {
-      background-color: #ffd700;
-      color: black;
-      font-weight: bold;
-    }
-
-    @media (max-width: 600px) {
-      .petal {
-        display: block;
-        width: 80%;
-        margin: 10px auto;
-      }
-      .vote-options {
-        flex-direction: column;
-      }
+    footer {
+      margin-top: 60px;
+      padding: 20px 0;
+      background-color: #1b1633;
+      color: #ccc;
+      font-size: 14px;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <img src="flt-logo.png" alt="FL Token Logo" class="logo" />
+  <header>
     <h1>FLLA Token</h1>
+    <p>The Future of Community and Innovation</p>
+  </header>
 
-    <div class="petal">Presale</div>
-    <div class="petal">Vote</div>
-    <div class="petal">Whitepaper</div>
-    <div class="petal">Community</div>
+  <main>
+    <h2>Welcome to FLLA Presale</h2>
+    <p>FLLA is a modern, community-driven token empowering users through fair distribution and transparent governance.</p>
 
-    <!-- Presale Section -->
-    <section id="presale" class="section">
-      <h2>Presale</h2>
-      <label for="currency">Payment Currency:</label>
-      <select id="currency" onchange="calculateFLLA()">
-        <option value="usdt">USDT</option>
-        <option value="bnb">BNB</option>
-      </select>
+    <div class="counter-box">
+      <div class="counter-title">Tokens Sold</div>
+      <div id="counter" class="counter-number">0</div>
+      <p>out of 70,000,000 available in presale</p>
+    </div>
 
-      <label for="paidAmount">Amount to Pay:</label>
-      <input type="number" id="paidAmount" placeholder="e.g. 100" oninput="calculateFLLA()" />
+    <button class="btn">Join Presale</button>
+  </main>
 
-      <label for="receivedFLLA">You will receive:</label>
-      <input type="text" id="receivedFLLA" readonly />
+  <footer>
+    <p>© 2025 FLLA Foundation. All rights reserved.</p>
+  </footer>
 
-      <button class="btn">Buy Now</button>
-    </section>
-
-    <!-- Vote Section -->
-    <section id="vote" class="section">
-      <h2>Vote</h2>
-      <p>Select your vote and optionally submit a proposal (max 50 characters).</p>
-
-      <div class="vote-options">
-        <input type="radio" id="agree" name="vote" value="agree">
-        <label for="agree">✅ Agree</label>
-
-        <input type="radio" id="disagree" name="vote" value="disagree">
-        <label for="disagree">❌ Disagree</label>
-
-        <input type="radio" id="abstain" name="vote" value="abstain">
-        <label for="abstain">⚪️ Abstain</label>
-      </div>
-
-      <label for="proposal">Proposal (max 50 characters):</label>
-      <input type="text" id="proposal" maxlength="50" placeholder="e.g. Allocate 3% to marketing" />
-
-      <button class="btn">Submit Vote</button>
-    </section>
-
-    <!-- Whitepaper Section -->
-    <section id="whitepaper" class="section">
-      <h2>Whitepaper</h2>
-      <p>Download the official whitepaper to learn more about FLLA Token's vision, roadmap, and governance.</p>
-      <a href="whitepaper.pdf" class="btn" target="_blank">Download PDF</a>
-    </section>
-
-    <!-- Community Section -->
-    <section id="community" class="section">
-      <h2>Community</h2>
-      <p>Join our active community and stay updated:</p>
-      <ul>
-        <li><a href="https://t.me/fllatoken" target="_blank">Telegram</a></li>
-        <li><a href="https://twitter.com/fllatoken" target="_blank">Twitter</a></li>
-        <li><a href="https://discord.gg/fllatoken" target="_blank">Discord</a></li>
-      </ul>
-    </section>
-  </div>
-
+  <!-- Counter Animation Script -->
   <script>
-    const fllaPriceInUSDT = 0.00005;
-    const bnbPriceInUSDT = 250;
+    let start = 0;
+    let sold = 5234000; // 🔹 عدّل هذا الرقم ليكون عدد التوكنات المباعة الحقيقي
+    let counter = document.getElementById("counter");
 
-    function calculateFLLA() {
-      const currency = document.getElementById("currency").value;
-      const paidAmount = parseFloat(document.getElementById("paidAmount").value);
-      let fllaAmount = 0;
-
-      if (!isNaN(paidAmount)) {
-        if (currency === "usdt") {
-          fllaAmount = paidAmount / fllaPriceInUSDT;
-        } else if (currency === "bnb") {
-          const paidInUSDT = paidAmount * bnbPriceInUSDT;
-          fllaAmount = paidInUSDT / fllaPriceInUSDT;
-        }
+    let interval = setInterval(() => {
+      if (start < sold) {
+        start += Math.floor(Math.random() * 5000); // يزيد بشكل عشوائي طبيعي
+        if (start > sold) start = sold;
+        counter.textContent = start.toLocaleString();
+      } else {
+        clearInterval(interval);
       }
-
-      document.getElementById("receivedFLLA").value = `${fllaAmount.toFixed(2)} FLLA`;
-    }
+    }, 50);
   </script>
 </body>
 </html>
